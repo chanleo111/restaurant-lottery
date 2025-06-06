@@ -48,7 +48,7 @@ function App() {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg min-h-screen flex flex-col justify-center">
-      <h1 className="text-2xl font-bold text-center mb-4">今天吃什麼？命運轉盤幫你決定！</h1>
+      <h1 className="text-2xl font-bold text-center mb-4">午餐救星！隨機抽選你的今日美味</h1>
       <RestaurantInput onAdd={addRestaurant} />
       <DrawButton onDraw={drawRestaurant} disabled={restaurants.length === 0} />
       <ResultDisplay selectedRestaurant={selectedRestaurant} />
