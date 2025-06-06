@@ -1,13 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RestaurantInput from './components/RestaurantInput';
 import RestaurantList from './components/RestaurantList';
 import DrawButton from './components/DrawButton';
 import ResultDisplay from './components/ResultDisplay';
 import './styles.css';
+import './index.css';
 
 function App() {
-  const [restaurants, setRestaurants] = useState([]);
+  const [restaurants, setRestaurants] = useState(() => {
+    try {
+      const savedRestaurants = localStorage.getItem('restaurants');
+      return savedRestaurants ? JSON.parse(savedRestaurants) : [];
+    } catch (error) {
+      console.error('Error parsing localStorage restaurants:', error);
+      return [];
+    }
+  });
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('restaurants', JSON.stringify(restaurants));
+    } catch (error) {
+      console.error('Error saving to localStorage:', error);
+    }
+  }, [restaurants]);
 
   const addRestaurant = (name) => {
     if (name.trim()) {
@@ -31,7 +48,7 @@ function App() {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg min-h-screen flex flex-col justify-center">
-      <h1 className="text-2xl font-bold text-center mb-4">餐廳抽獎</h1>
+      <h1 className="text-2xl font-bold text-center mb-4">今天吃什麼？命運轉盤幫你決定！</h1>
       <RestaurantInput onAdd={addRestaurant} />
       <DrawButton onDraw={drawRestaurant} disabled={restaurants.length === 0} />
       <ResultDisplay selectedRestaurant={selectedRestaurant} />
