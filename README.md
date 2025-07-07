@@ -12,6 +12,3 @@ npm install
 
 npm run dev
 
-Build production version
-
-npm run build
