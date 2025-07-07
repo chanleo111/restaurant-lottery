@@ -7,7 +7,11 @@
 👉 **[Live Demo](https://chanleo111.github.io/restaurant-lottery/)** 👈  
 ---------------------------------------------------------------------
 git clone https://github.com/chanleo111/restaurant-lottery.git
+
 npm install
+
 npm run dev
+
 Build production version
+
 npm run build
